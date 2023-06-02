@@ -6,7 +6,7 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.domain ;
+package application.domain ;
 
 import java.sql.Date ;
 import java.sql.Time ;
@@ -54,9 +54,9 @@ public class BookingSystem
   
   public void notifyObservers()
   {
-    Enumeration enum = observers.elements() ;
-    while (enum.hasMoreElements()) {
-      BookingObserver bo = (BookingObserver) enum.nextElement() ;
+    Enumeration enumer = observers.elements() ;
+    while (enumer.hasMoreElements()) {
+      BookingObserver bo = (BookingObserver) enumer.nextElement() ;
       bo.update() ;
     }
   }
@@ -100,9 +100,9 @@ public class BookingSystem
   public void selectBooking(int tno, Time time)
   {
     selectedBooking = null ;
-    Enumeration enum = currentBookings.elements() ;
-    while (enum.hasMoreElements()) {
-      Booking b = (Booking) enum.nextElement() ;
+    Enumeration enumer = currentBookings.elements() ;
+    while (enumer.hasMoreElements()) {
+      Booking b = (Booking) enumer.nextElement() ;
       if (b.getTableNumber() == tno) {
 	if (b.getTime().before(time)
 	    && b.getEndTime().after(time)) {
@@ -160,9 +160,9 @@ public class BookingSystem
     Time endTime = (Time) startTime.clone() ;
     endTime.setHours(endTime.getHours() + 2) ;
     
-    Enumeration enum = currentBookings.elements() ;
-    while (!doubleBooked && enum.hasMoreElements()) {
-      Booking b = (Booking) enum.nextElement() ;
+    Enumeration enumer = currentBookings.elements() ;
+    while (!doubleBooked && enumer.hasMoreElements()) {
+      Booking b = (Booking) enumer.nextElement() ;
       if (b != ignore && b.getTableNumber() == tno
 	  && startTime.before(b.getEndTime())
 	  && endTime.after(b.getTime())) {

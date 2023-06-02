@@ -6,9 +6,9 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.persistency ;
+package application.persistency ;
 
-import booksys.application.domain.Customer;
+import application.domain.Customer;
 
 class PersistentCustomer extends Customer
 {

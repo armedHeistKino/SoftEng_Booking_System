@@ -6,7 +6,7 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.domain ;
+package application.domain ;
 
 public class Table
 {

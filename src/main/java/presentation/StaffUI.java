@@ -6,9 +6,9 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.presentation ;
+package presentation ;
 
-import booksys.application.domain.* ;
+import application.domain.* ;
 
 import java.awt.* ;
 import java.awt.event.* ;

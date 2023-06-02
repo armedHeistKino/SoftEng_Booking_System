@@ -6,7 +6,7 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.presentation ;
+package presentation ;
 
 import java.awt.* ;
 import java.awt.event.* ;

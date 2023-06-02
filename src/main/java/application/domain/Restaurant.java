@@ -6,9 +6,9 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.domain ;
+package application.domain ;
 
-import booksys.application.persistency.* ;
+import application.persistency.* ;
 
 import java.sql.Date ;
 import java.sql.Time ;

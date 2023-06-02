@@ -6,13 +6,13 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.persistency ;
+package application.persistency ;
 
-import booksys.application.domain.Booking ;
-import booksys.application.domain.Reservation ;
-import booksys.application.domain.Customer ;
-import booksys.application.domain.Table ;
-import booksys.storage.* ;
+import application.domain.Booking ;
+import application.domain.Reservation ;
+import application.domain.Customer ;
+import application.domain.Table ;
+import storage.* ;
 
 import java.sql.* ;
 import java.util.Enumeration ;

@@ -6,7 +6,7 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.storage ;
+package storage ;
 
 import java.sql.* ;
 import java.util.Date ;

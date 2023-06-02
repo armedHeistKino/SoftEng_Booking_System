@@ -6,9 +6,9 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.persistency ;
+package application.persistency ;
 
-import booksys.application.domain.* ;
+import application.domain.* ;
 
 interface PersistentBooking extends Booking
 {

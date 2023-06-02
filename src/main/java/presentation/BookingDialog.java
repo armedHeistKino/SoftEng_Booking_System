@@ -6,10 +6,10 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.presentation ;
+package presentation ;
 
-import booksys.application.domain.Booking ;
-import booksys.application.domain.BookingSystem ;
+import application.domain.Booking ;
+import application.domain.BookingSystem ;
 
 import java.awt.* ;
 import java.awt.event.* ;
@@ -51,9 +51,9 @@ abstract class BookingDialog extends Dialog
     
     tableNumberLabel = new Label("Table number:", Label.RIGHT) ;
     tableNumber = new Choice() ;
-    Enumeration enum = BookingSystem.getTableNumbers().elements() ;
-    while (enum.hasMoreElements()) {
-      tableNumber.add(((Integer) enum.nextElement()).toString()) ;
+    Enumeration enumer = BookingSystem.getTableNumbers().elements() ;
+    while (enumer.hasMoreElements()) {
+      tableNumber.add(((Integer) enumer.nextElement()).toString()) ;
     }
     if (booking != null) {
       tableNumber.select(Integer.toString(booking.getTable().getNumber())) ;

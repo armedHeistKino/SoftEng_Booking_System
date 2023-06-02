@@ -6,9 +6,9 @@
  * McGraw-Hill (2004)
  */
 
-package booksys.application.persistency ;
+package application.persistency ;
 
-import booksys.storage.* ;
+import storage.* ;
 
 import java.sql.* ;
 import java.util.Enumeration ;
@@ -29,9 +29,9 @@ public class CustomerMapper
   private PersistentCustomer getFromCacheByDetails(String name, String phone)
   {
     PersistentCustomer c = null ;
-    Enumeration enum = cache.elements() ;
-    while (c == null && enum.hasMoreElements()) {
-      PersistentCustomer tmp = (PersistentCustomer) enum.nextElement() ;
+    Enumeration enumer = cache.elements() ;
+    while (c == null && enumer.hasMoreElements()) {
+      PersistentCustomer tmp = (PersistentCustomer) enumer.nextElement() ;
       if (name.equals(tmp.getName()) && phone.equals(tmp.getPhoneNumber())) {
 	c = tmp ;
       }
