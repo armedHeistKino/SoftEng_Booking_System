@@ -14,7 +14,7 @@ public class ApplicationContext {
 		
 		// DataSource에 대한 Driver 설정
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc://localhost/spring5fs?characterEncoding=utf8");
+		ds.setUrl("jdbc://localhost/BOOKING_SYSTEM?characterEncoding=utf8");
 		ds.setUsername("res_master");
 		ds.setPassword("res_master");
 		
