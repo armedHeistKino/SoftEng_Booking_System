@@ -4,11 +4,12 @@ public class RegisteredCustomer {
     private String phoneNumber;
     private String name;
     private String password;
-    
-    public RegisteredCustomer(String phoneNumber, String password, String name) {
-    	this.phoneNumber = phoneNumber;
-    	this.name = name;
-    	this.password = password;
+
+    public RegisteredCustomer(String phoneNumber, String name, String password) {
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.password = password;
+
     }
 
     public void setPhoneNumber(String phoneNumber) {
