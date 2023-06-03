@@ -37,7 +37,7 @@ public class BookingSystem
     return uniqueInstance ;
   }
 
-  private BookingSystem()
+  protected BookingSystem()
   {
     today = new Date(Calendar.getInstance().getTimeInMillis()) ;
     restaurant = new Restaurant() ;
