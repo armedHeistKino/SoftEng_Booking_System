@@ -12,13 +12,14 @@ import java.sql.Date ;
 import java.sql.Time ;
 import java.util.* ;
 
+
 public class BookingSystem
 {
   // Attributes:
 
   Date currentDate ;
   Date today ;
-  
+
   // Associations:
 
   Restaurant restaurant = null ;
@@ -26,7 +27,7 @@ public class BookingSystem
   Booking selectedBooking ;
 
   // Singleton:
-  
+
   private static BookingSystem uniqueInstance ;
 
   public static BookingSystem getInstance()
@@ -37,7 +38,8 @@ public class BookingSystem
     return uniqueInstance ;
   }
 
-  protected BookingSystem()
+
+  BookingSystem()
   {
     today = new Date(Calendar.getInstance().getTimeInMillis()) ;
     restaurant = new Restaurant() ;
@@ -51,7 +53,7 @@ public class BookingSystem
   {
     observers.addElement(o) ;
   }
-  
+
   public void notifyObservers()
   {
     Enumeration enumer = observers.elements() ;
@@ -66,7 +68,7 @@ public class BookingSystem
     BookingObserver bo = (BookingObserver) observers.elementAt(0) ;
     return bo.message(message, confirm) ;
   }
-  
+
   // System messages:
 
   public void display(Date date)
@@ -76,18 +78,18 @@ public class BookingSystem
     selectedBooking = null ;
     notifyObservers() ;
   }
-  
+
   public void makeReservation(int covers, Date date, Time time, int tno,
-			      String name, String phone)
+                              String name, String phone)
   {
     if (!doubleBooked(time, tno, null) && !overflow(tno, covers)) {
       Booking b
-	= restaurant.makeReservation(covers, date, time, tno, name, phone) ;
+              = restaurant.makeReservation(covers, date, time, tno, name, phone) ;
       currentBookings.addElement(b) ;
       notifyObservers() ;
     }
   }
- 
+
   public void makeWalkIn(int covers, Date date, Time time, int tno)
   {
     if (!doubleBooked(time, tno, null) && !overflow(tno, covers)) {
@@ -96,7 +98,7 @@ public class BookingSystem
       notifyObservers() ;
     }
   }
-  
+
   public void selectBooking(int tno, Time time)
   {
     selectedBooking = null ;
@@ -104,10 +106,10 @@ public class BookingSystem
     while (enumer.hasMoreElements()) {
       Booking b = (Booking) enumer.nextElement() ;
       if (b.getTableNumber() == tno) {
-	if (b.getTime().before(time)
-	    && b.getEndTime().after(time)) {
-	  selectedBooking = b ;
-	}
+        if (b.getTime().before(time)
+                && b.getEndTime().after(time)) {
+          selectedBooking = b ;
+        }
       }
     }
     notifyObservers() ;
@@ -117,24 +119,24 @@ public class BookingSystem
   {
     if (selectedBooking != null) {
       if (observerMessage("Are you sure?", true)) {
-	currentBookings.remove(selectedBooking) ;
-	restaurant.removeBooking(selectedBooking) ;
-	selectedBooking = null ;
-	notifyObservers() ;
+        currentBookings.remove(selectedBooking) ;
+        restaurant.removeBooking(selectedBooking) ;
+        selectedBooking = null ;
+        notifyObservers() ;
       }
     }
   }
-  
+
   public void recordArrival(Time time)
   {
     if (selectedBooking != null) {
       if (selectedBooking.getArrivalTime() != null) {
-	observerMessage("Arrival already recorded", false) ;
+        observerMessage("Arrival already recorded", false) ;
       }
       else {
-	selectedBooking.setArrivalTime(time) ;
-	restaurant.updateBooking(selectedBooking) ;
-	notifyObservers() ;
+        selectedBooking.setArrivalTime(time) ;
+        restaurant.updateBooking(selectedBooking) ;
+        notifyObservers() ;
       }
     }
   }
@@ -143,55 +145,55 @@ public class BookingSystem
   {
     if (selectedBooking != null) {
       if (selectedBooking.getTableNumber() != tno) {
-	if (!doubleBooked(selectedBooking.getTime(), tno, selectedBooking)
-	    && !overflow(tno, selectedBooking.getCovers())) {
-	  selectedBooking.setTable(restaurant.getTable(tno)) ;
-	  restaurant.updateBooking(selectedBooking) ;
-	}
+        if (!doubleBooked(selectedBooking.getTime(), tno, selectedBooking)
+                && !overflow(tno, selectedBooking.getCovers())) {
+          selectedBooking.setTable(restaurant.getTable(tno)) ;
+          restaurant.updateBooking(selectedBooking) ;
+        }
       }
       notifyObservers() ;
     }
   }
-  
+
   private boolean doubleBooked(Time startTime, int tno, Booking ignore)
   {
     boolean doubleBooked = false ;
 
     Time endTime = (Time) startTime.clone() ;
     endTime.setHours(endTime.getHours() + 2) ;
-    
+
     Enumeration enumer = currentBookings.elements() ;
     while (!doubleBooked && enumer.hasMoreElements()) {
       Booking b = (Booking) enumer.nextElement() ;
       if (b != ignore && b.getTableNumber() == tno
-	  && startTime.before(b.getEndTime())
-	  && endTime.after(b.getTime())) {
-	doubleBooked = true ;
-	observerMessage("Double booking!", false) ;
+              && startTime.before(b.getEndTime())
+              && endTime.after(b.getTime())) {
+        doubleBooked = true ;
+        observerMessage("Double booking!", false) ;
       }
     }
     return doubleBooked ;
   }
-  
+
   private boolean overflow(int tno, int covers)
   {
     boolean overflow = false ;
     Table t = restaurant.getTable(tno) ;
-      
+
     if (t.getPlaces() < covers) {
       overflow = !observerMessage("Ok to overfill table?", true) ;
     }
-    
+
     return overflow ;
   }
-  
+
   // Other Operations:
 
   public Date getCurrentDate()
   {
     return currentDate ;
   }
-  
+
   public Enumeration getBookings()
   {
     return currentBookings.elements() ;

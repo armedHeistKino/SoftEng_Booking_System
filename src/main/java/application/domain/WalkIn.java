@@ -8,11 +8,14 @@
 
 package application.domain ;
 
+import org.springframework.context.annotation.Configuration;
+
 import java.sql.Date ;
 import java.sql.Time ;
 
 public class WalkIn extends BookingImp
 {
+
   public WalkIn(int c, Date d, Time t, Table tab)
   {
     super(c, d, t, tab) ;

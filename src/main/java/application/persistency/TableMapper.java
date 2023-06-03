@@ -8,12 +8,15 @@
 
 package application.persistency ;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import storage.Database ;
 
 import java.sql.* ;
 import java.util.Enumeration ;
 import java.util.Hashtable ;
 import java.util.Vector ;
+
 
 public class TableMapper
 {
@@ -23,8 +26,14 @@ public class TableMapper
 
   private PersistentTable getFromCache(int oid)
   {
-    Integer key = new Integer(oid) ;
-    return (PersistentTable) cache.get(key) ;
+    Integer key = Integer.valueOf(oid);
+    return (PersistentTable) cache.get(key);
+  }
+
+  private void addToCache(PersistentCustomer c)
+  {
+    Integer key = Integer.valueOf(c.getId());
+    cache.put(key, c);
   }
 
   private PersistentTable getFromCacheByNumber(int tno)
@@ -39,22 +48,22 @@ public class TableMapper
     }
     return t ;
   }
-  
+
   private void addToCache(PersistentTable t)
   {
-    Integer key = new Integer(t.getId()) ;
-    cache.put(key, t) ;
+    Integer key = Integer.valueOf(t.getId());
+    cache.put(key, t);
   }
   
   // Constructor:
-  
+
   private TableMapper()
   {
     cache = new Hashtable() ;
   }
 
   // Singleton:
-  
+
   private static TableMapper uniqueInstance ;
 
   public static TableMapper getInstance()
@@ -77,6 +86,7 @@ public class TableMapper
     return t ;
   }
 
+
   PersistentTable getTableForOid(int oid)
   {
     PersistentTable t = getFromCache(oid) ;
@@ -88,6 +98,7 @@ public class TableMapper
     }
     return t ;
   }
+
 
   private PersistentTable getTable(String sql)
   {
@@ -111,24 +122,23 @@ public class TableMapper
     return t ;
   }
 
+
   public Vector getTableNumbers()
   {
-    Vector v = new Vector() ;
+    Vector v = new Vector();
     try {
-      Statement stmt
-	= Database.getInstance().getConnection().createStatement() ;
-      ResultSet rset
-	= stmt.executeQuery("SELECT * FROM `Table` ORDER BY number") ;
+      Statement stmt = Database.getInstance().getConnection().createStatement();
+      ResultSet rset = stmt.executeQuery("SELECT * FROM `Table` ORDER BY number");
       while (rset.next()) {
-	v.addElement(new Integer(rset.getInt(2))) ;
+        v.addElement(Integer.valueOf(rset.getInt(2)));
       }
-      rset.close() ;
-      stmt.close() ;
+      rset.close();
+      stmt.close();
     }
     catch (SQLException e) {
-      e.printStackTrace() ;
+      e.printStackTrace();
     }
-    return v ;
-  }    
+    return v;
+  }
   
 }
