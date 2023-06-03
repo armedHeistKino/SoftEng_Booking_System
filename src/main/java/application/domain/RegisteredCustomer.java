@@ -9,6 +9,7 @@ public class RegisteredCustomer {
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.password = password;
+
     }
 
     public void setPhoneNumber(String phoneNumber) {

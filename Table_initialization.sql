@@ -1,4 +1,6 @@
+
 create user 'res_master'@'localhost' identified by 'res_master' ;
+
 
 CREATE DATABASE BOOKING_SYSTEM character set = utf8;
 
@@ -23,12 +25,23 @@ CREATE TABLE RegisteredCustomer (
     unique key(phoneNumber)
 ) ;
 
-INSERT INTO RegisterdCustomer
+CREATE TABLE Customer (
+	oid				INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	phoneNumber		CHAR(14) NOT NULL,
+    password		VARCHAR(20) NOT NULL,
+    name			VARCHAR(30) NOT NULL, 
+    
+    unique key(phoneNumber)   
+) ;
+
+INSERT INTO Customer
+
 VALUES ("0000-0000-0000", "00", "현장손님") ;
 
 CREATE TABLE Placement (
 	oid				INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     table_oid		INT NOT NULL,
+
     registered_customer_oid	INT NOT NULL,
 
 	placed_time		DATETIME NOT NULL,
