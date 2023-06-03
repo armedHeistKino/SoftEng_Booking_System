@@ -9,17 +9,20 @@
 package application.domain ;
 
 import application.persistency.* ;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.sql.Date ;
 import java.sql.Time ;
 import java.util.Vector ;
+
 
 class Restaurant
 {
   BookingMapper  bm = BookingMapper.getInstance() ;
   CustomerMapper cm = CustomerMapper.getInstance() ;
   TableMapper    tm = TableMapper.getInstance() ;
-  
+
   Vector getBookings(Date date)
   {
     return bm.getBookings(date) ;
@@ -29,7 +32,7 @@ class Restaurant
   {
     return cm.getCustomer(name, phone) ;
   }
-  
+
   Table getTable(int n)
   {
     return tm.getTable(n) ;
@@ -60,7 +63,7 @@ class Restaurant
   {
     bm.updateBooking(b) ;
   }
-  
+
   public void removeBooking(Booking b) {
     bm.deleteBooking(b) ;
   }

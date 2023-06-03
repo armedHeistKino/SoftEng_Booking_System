@@ -8,6 +8,8 @@
 
 package application.domain ;
 
+import org.springframework.stereotype.Component;
+
 import java.sql.Date ;
 import java.sql.Time ;
 
@@ -16,8 +18,11 @@ import java.sql.Time ;
    PersistentWalkin which already extend Reservation and Walkin.
 */
 
+
+@Component
 public interface Booking
 {
+
   public Time  getArrivalTime() ;
   public int   getCovers() ;
   public Date  getDate() ;

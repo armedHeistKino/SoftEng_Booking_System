@@ -9,7 +9,10 @@
 package application.persistency ;
 
 import application.domain.* ;
+import org.springframework.stereotype.Component;
 
+
+@Component
 interface PersistentBooking extends Booking
 {
   int getId() ;
