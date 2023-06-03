@@ -8,6 +8,10 @@
 
 package application.domain ;
 
+
+import org.springframework.stereotype.Component;
+
+@Component
 public interface BookingObserver
 {
   public void update() ;

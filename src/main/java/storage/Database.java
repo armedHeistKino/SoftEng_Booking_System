@@ -31,7 +31,7 @@ public class Database
   private Database()
   {
     // Get a connection
-    con = Connectivity.getConnection("booksys.properties") ;
+    con = Connectivity.getConnection("properties") ;
   }
 
   public static Connection getConnection() {

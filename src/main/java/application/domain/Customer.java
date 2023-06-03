@@ -8,22 +8,24 @@
 
 package application.domain ;
 
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+
 public class Customer
 {
   private String name ;
   private String phoneNumber ;
-
   public Customer(String n, String p)
   {
     name = n ;
     phoneNumber = p ;
   }
-
   public String getName()
   {
     return name ;
   }
-
   public String getPhoneNumber()
   {
     return phoneNumber ;
