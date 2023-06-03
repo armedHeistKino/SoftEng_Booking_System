@@ -11356,3 +11356,49 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+.reservation-screen-background-image {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  color: #fff;
+  background-image: url("../assets/img/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.reservation-wrapper {
+  width: 80%;
+  height: 90%;
+  background-color: #9BA4B5;
+  text-align: center;
+  border-radius: 5%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.table-list-wrapper {
+  width: 95%;
+  border-radius: 3%;
+  padding: 2%;
+}
+.restaurant-table {
+  width: 20%;
+  height: 200px;
+  margin: 10px;
+  background-color: #F1F6F9;
+  border-radius: 3%;
+  color: black;
+}
+.restaurant-table:hover {
+  cursor: pointer;
+  background-color: #B0DAFF;
+}
+.restaurant-table:focus {
+  background: #7ea338;
+  color: white;
+}
