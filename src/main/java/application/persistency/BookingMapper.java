@@ -19,10 +19,12 @@ import java.util.Enumeration ;
 import java.util.Hashtable ;
 import java.util.Vector ;
 
+
+
 public class BookingMapper
 {
   // Singleton:
-  
+
   private static BookingMapper uniqueInstance ;
 
   public static BookingMapper getInstance()
@@ -80,7 +82,7 @@ public class BookingMapper
     }
     return v ;
   }
-  
+
   public PersistentReservation createReservation(int covers,
 						 Date date,
 						 Time time,
@@ -106,8 +108,9 @@ public class BookingMapper
 				     table,
 				     customer,
 				     arrivalTime) ;
-  } 
-  
+  }
+
+
   public PersistentWalkIn createWalkIn(int covers,
 				       Date date,
 				       Time time,
@@ -121,7 +124,8 @@ public class BookingMapper
 		  + time + "', '"
 		  + ((PersistentTable) table).getId() + "')" ) ;
     return new PersistentWalkIn(oid, covers, date, time, table) ;
-  } 
+  }
+
 
   public void updateBooking(Booking b)
   {
@@ -158,13 +162,15 @@ public class BookingMapper
 
     performUpdate(sql.toString()) ;
   }
-  
+
+
   public void deleteBooking(Booking b)
   {
     String table = b instanceof Reservation ? "Reservation" : "WalkIn" ;
     performUpdate("DELETE FROM " + table + " WHERE oid = '"
 		  + ((PersistentBooking) b).getId() + "'" ) ;
   }
+
 
   private void performUpdate(String sql)
   {

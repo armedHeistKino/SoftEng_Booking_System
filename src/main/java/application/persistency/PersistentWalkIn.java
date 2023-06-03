@@ -9,6 +9,10 @@
 package application.persistency ;
 
 import application.domain.* ;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+
 
 class PersistentWalkIn extends WalkIn implements PersistentBooking
 {

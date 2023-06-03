@@ -9,6 +9,10 @@
 package application.persistency ;
 
 import application.domain.* ;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+
 
 class PersistentReservation
   extends Reservation implements PersistentBooking
@@ -23,7 +27,7 @@ class PersistentReservation
   }
 
   /* public because getId defined in an interface and hence public */
-  
+
   public int getId() {
     return oid ;
   }
