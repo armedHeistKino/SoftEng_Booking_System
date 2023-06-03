@@ -17,6 +17,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import application.domain.RegisteredCustomer;
+import application.domain.Placement;
 
 public class DatabaseHandler {
 	
@@ -24,10 +25,6 @@ public class DatabaseHandler {
 	
 	public DatabaseHandler(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
-	
-	public List<RegisteredCustomer> selectAllRegisteredCustomer() {
-		return null;
 	}
 	
 	public RegisteredCustomer selectCustomerByPhoneNumber(String phoneNumber) {
@@ -78,4 +75,54 @@ public class DatabaseHandler {
 		
 		return results.isEmpty() ? null : results.get(0);
 	}
+
+	public List<Placement> selectAllPlacement() {
+		List<Placement> results = jdbcTemplate.query("SELECT * FROM BOOK_SYSTEM.Placement", 
+				new RowMapper<Placement>() {
+					@Override
+					public Placement mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Placement p = new Placement(
+								rs.getLong("TABLE_OID"),
+								rs.getLong("REGISTERED_CUSTOMER_OID"),
+								rs.getString("ORDER_TYPE"),
+								rs.getTimestamp("PLACED_TIME"),
+								rs.getLong("VISIT_HOUR"));
+						return p; } });
+		
+		return results;
+		
+	}
+	
+	public void insertReservationPlacement(Placement placement) {
+		jdbcTemplate.update( new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con.prepareStatement(
+				"INSERT INTO BOOK_SYSTEM.Placement (TABLE_OID, REGISTERED_CUSTOMER_OID, ORDER_TYPE, PLACED_TIME, VISIT_HOUR)" + "VALUES(?, ?, ?, ?, ?)");
+				pstmt.setString(1, placement.getTableId().toString());
+				pstmt.setString(2, "Reservation");
+				pstmt.setString(3, placement.getRegisteredCustomerId().toString());
+				pstmt.setString(4, placement.getPlacedTime().toString());
+				pstmt.setString(5, placement.getVisitHour().toString());
+				return pstmt; } }
+		);
+	}
+	
+	public void insertWalkInPlacement(Placement placement) {
+		jdbcTemplate.update( new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con.prepareStatement(
+				"INSERT INTO BOOK_SYSTEM.Placement (TABLE_OID, REGISTERED_CUSTOMER_OID, ORDER_TYPE, PLACED_TIME, VISIT_HOUR)" + "VALUES(?, ?, ?, ?, ?)");
+				pstmt.setString(1, placement.getTableId().toString());
+				pstmt.setString(2, "WalkIn");
+				pstmt.setString(3, placement.getRegisteredCustomerId().toString());
+				pstmt.setString(4, placement.getPlacedTime().toString());
+				pstmt.setString(5, placement.getVisitHour().toString());
+				return pstmt; } }
+		);
+	}
+	
+	// public void cancelPlacement(Placement placement) { }
+	
 }
